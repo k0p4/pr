@@ -6,25 +6,6 @@
 Controller::Controller(QObject *parent)
     : QObject(parent)
 {
-    QTimer::singleShot(5000, this, [this](){
-        GoodsInfo info1, info2, info3;
-
-        info1.setName("Good #1");
-        info1.setCount(10);
-        info1.setVendorCode("good_1");
-
-        info2.setName("Good #2");
-        info2.setCount(15);
-        info2.setVendorCode("good_2");
-
-        info3.setName("Good #3");
-        info3.setCount(20);
-        info3.setVendorCode("good_3");
-
-        this->addGood(info1);
-        this->addGood(info2);
-        this->addGood(info3);
-    });
 }
 
 Controller* Controller::instance()
