@@ -45,10 +45,10 @@ static const QString updateOrders       { "INSERT INTO orders (product_name, ven
                                           "count, vendor_name, product_type, capacity, cores,"
                                           "customer_name, custumer_phone_number, customer_adress,"
                                           "deliver_time, retrive_place)"
-                                          "VALUES (:name, :vendor_code, :product_name,"
-                                          ":count, :vendor_name, :product_type, :capacity, :cores,"
-                                          ":customer_name, :custumer_phone_number, :customer_adress,"
-                                          ":deliver_time, :retrive_place)" };
+                                          "VALUES (:product_name, :vendor_code, :count, :vendor_name,"
+                                          ":product_type, :capacity, :cores, :customer_name,"
+                                          ":custumer_phone_number, :customer_adress, :deliver_time,"
+                                          ":retrive_place)" };
 
 static const QString getGoods           { "SELECT * FROM goods" };
 static const QString getOrders          { "SELECT * FROM orders" };
