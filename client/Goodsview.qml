@@ -24,7 +24,7 @@ ColumnLayout {
             highlight: Rectangle { color: "green" }
 
             delegate: Label {
-                text: model.name
+                text: model.record.name
 
                 MouseArea {
                     anchors.fill: parent

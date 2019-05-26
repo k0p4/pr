@@ -5,7 +5,6 @@ import QtQuick.Controls 2.12
 ColumnLayout {
     signal loginRequested(string login, string password)
     signal logoutRequested
-    signal cancelRequested
     property bool isLoggedIn: false
 
     RowLayout {
@@ -43,11 +42,6 @@ ColumnLayout {
             text: "Logout"
             onClicked: logoutRequested()
             enabled: isLoggedIn
-        }
-
-        Button {
-            text: "Cancel"
-            onClicked: cancelRequested()
         }
     }
 }

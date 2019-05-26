@@ -96,6 +96,11 @@ void Controller::setConnected(bool connected)
 
     m_connected = connected;
     emit connectedChanged(m_connected);
+
+    if (!m_connected) {
+        m_uid = QUuid();
+        setLoggedIn(false);
+    }
 }
 
 void Controller::setLoggedIn(bool loggedIn)

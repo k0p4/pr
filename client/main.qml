@@ -18,9 +18,9 @@ Window {
             id: tabBar
             currentIndex: 1
 
-            TabButton { implicitWidth: 100; text: "Goods" }
+            TabButton { implicitWidth: 100; text: "Goods"; enabled: Controller.connected }
             TabButton { implicitWidth: 100; text: "Login/logout" }
-            TabButton { implicitWidth: 100; text: "Orders" }
+            TabButton { implicitWidth: 100; text: "Orders"; enabled: Controller.loggedIn }
         }
 
         StackLayout {
@@ -31,6 +31,7 @@ Window {
             currentIndex: tabBar.currentIndex
 
             Goodsview {
+                enabled: Controller.connected
                 model: Controller.goodsModel
 
                 onOrderRequested: Controller.orderGood(index, count);
@@ -41,10 +42,11 @@ Window {
 
                 onLoginRequested: Controller.loginAsEmployee(login, password)
                 onLogoutRequested: Controller.logOff();
-                onCancelRequested: tabBar.currentIndex = 0;
             }
 
             Ordersview {
+                enabled: Controller.loggedIn
+
                 Label { anchors.centerIn: parent; text: "Orders" }
             }
         }
@@ -57,6 +59,8 @@ Window {
         onLoggedInChanged: {
             if (Controller.loggedIn)
                 tabBar.currentIndex = 0;
+            else
+                tabBar.currentIndex = 1;
         }
     }
 }
