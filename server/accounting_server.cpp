@@ -131,12 +131,25 @@ void AccountingServer::orderGood(const GoodsInfo& sourceGood, const PersonalInfo
     CHECK_SQL_ERR;
 
     if (count == 0) {
+        emit goodRemoved(m_goods.indexOf(*neededGood));
         m_goods.erase(neededGood);
+    } else {
+        emit goodChanged(m_goods.indexOf(*neededGood), *neededGood);
     }
 
     neededGood->setCount(count);
     setAllGoods(m_goods);
     emit allGoodsChanged(m_goods);
+
+    Order o;
+    o.setCustomer(custumerInfo);
+    o.setGood(sourceGood);
+
+    m_orders.push_back(o);
+
+    emit orderAdded(o);
+
+    setOrders(m_orders);
 }
 
 QUuid AccountingServer::loginAsEmployee(const QString& login, const QString& password)
@@ -166,6 +179,7 @@ void AccountingServer::addGood(const GoodsInfo& sourceGood, const QUuid& employe
 
         m_goods.push_back(sourceGood);
 
+        emit goodAdded(sourceGood);
     } else {
         if (sourceGood.count() <= 0) {
             qDebug() << "Incorrect good count";
@@ -177,13 +191,15 @@ void AccountingServer::addGood(const GoodsInfo& sourceGood, const QUuid& employe
         CHECK_SQL_ERR;
 
         neededGood->setCount(sourceGood.count());
+
+        emit goodChanged(m_goods.indexOf(*neededGood), *neededGood);
     }
 
     setAllGoods(m_goods);
     emit allGoodsChanged(m_goods);
 }
 
-void AccountingServer::removeGood(const GoodsInfo &sourceGood, const QUuid& employeeId)
+void AccountingServer::removeGood(const GoodsInfo& sourceGood, const QUuid& employeeId)
 {
     CHECK_EMPLOYEE;
 
@@ -199,6 +215,10 @@ void AccountingServer::removeGood(const GoodsInfo &sourceGood, const QUuid& empl
     auto err = database->removeGood(sourceGood.vendorCode());
 
     CHECK_SQL_ERR;
+
+    emit goodRemoved(m_goods.indexOf(*neededGood));
+
+    m_goods.removeOne(*neededGood);
 
     setAllGoods(m_goods);
 }
