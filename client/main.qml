@@ -46,8 +46,7 @@ Window {
 
             Ordersview {
                 enabled: Controller.loggedIn
-
-                Label { anchors.centerIn: parent; text: "Orders" }
+                model: Controller.ordersModel
             }
         }
     }
