@@ -36,7 +36,7 @@ static const QString createOrdersTable  { "create table orders(id integer primar
                                           "deliver_time varchar, retrive_place varchar)" };
 
 static const QString insertGood         { "INSERT INTO goods (name, vendor_code, count, vendor_name, product_type, capacity, cores)"
-                                          "VALUES(:name, :vendor_code, :vendor_name, :product_type, :capacity, :cores)" };
+                                          "VALUES(:name, :vendor_code, :count, :vendor_name, :product_type, :capacity, :cores)" };
 static const QString removeGood         { "DELETE FROM goods WHERE vendor_code = :vendor_code" };
 
 
@@ -195,6 +195,7 @@ QSqlError DatabaseController::addNewGood(const GoodsInfo& sourceGood)
 
     q.bindValue(Constants::Placeholders::name, sourceGood.name());
     q.bindValue(Constants::Placeholders::vendorCode, sourceGood.vendorCode());
+    q.bindValue(Constants::Placeholders::count, sourceGood.count());
     q.bindValue(Constants::Placeholders::vendorName, sourceGood.vendorName());
     q.bindValue(Constants::Placeholders::productType, sourceGood.productType());
     q.bindValue(Constants::Placeholders::capacity, sourceGood.capacity());
