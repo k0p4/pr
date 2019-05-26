@@ -135,7 +135,9 @@ void Controller::connectToHost(const QUrl& hostUrl)
             m_ordersModel.setModelData(m_replica->orders());
 
             connect(m_replica, &AccountingServerReplica::goodAdded, &m_goodsModel, &GoodsModel::appendItem);
-            // Also: changed, removed, reset...
+            connect(m_replica, &AccountingServerReplica::goodRemoved, &m_goodsModel, &GoodsModel::removeItem);
+            connect(m_replica, &AccountingServerReplica::goodChanged, &m_goodsModel, &GoodsModel::changeItem);
+            // Also: reset...
 
             connect(m_replica, &AccountingServerReplica::orderAdded, &m_ordersModel, &OrdersModel::appendItem);
             // Also: changed, removed, reset...

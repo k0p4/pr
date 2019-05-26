@@ -18,10 +18,10 @@ static const QString productType            { ":product_type" };
 static const QString capacity               { ":capacity" };
 static const QString cores                  { ":cores" };
 static const QString customerName           { ":customer_name" };
-static const QString custumerPhoneNumber    { ":custumer_phone_numbe" };
-static const QString customerAddress         { ":customer_adress" };
+static const QString customerPhoneNumber    { ":customer_phone_number" };
+static const QString customerAddress         { ":customer_address" };
 static const QString deliverTime            { ":deliver_time" };
-static const QString retrievePlace           { ":retrive_place" };
+static const QString retrievePlace           { ":retrieve_place" };
 
 }
 
@@ -32,8 +32,8 @@ static const QString createGoodsTable   { "create table goods(id integer primary
 
 static const QString createOrdersTable  { "create table orders(id integer primary key, product_name varchar, vendor_code varchar,"
                                           "count integer, vendor_name varchar, product_type varchar, capacity varchar, cores integer,"
-                                          "customer_name varchar, custumer_phone_number varchar, customer_adress varchar,"
-                                          "deliver_time varchar, retrive_place varchar)" };
+                                          "customer_name varchar, customer_phone_numberr varchar, customer_address varchar,"
+                                          "deliver_time varchar, retrieve_place varchar)" };
 
 static const QString insertGood         { "INSERT INTO goods (name, vendor_code, count, vendor_name, product_type, capacity, cores)"
                                           "VALUES(:name, :vendor_code, :count, :vendor_name, :product_type, :capacity, :cores)" };
@@ -43,12 +43,12 @@ static const QString removeGood         { "DELETE FROM goods WHERE vendor_code =
 static const QString updateGoods        { "UPDATE goods SET count = :count WHERE vendor_code = :vendor_code;" };
 static const QString updateOrders       { "INSERT INTO orders (product_name, vendor_code,"
                                           "count, vendor_name, product_type, capacity, cores,"
-                                          "customer_name, custumer_phone_number, customer_adress,"
-                                          "deliver_time, retrive_place)"
+                                          "customer_name, customer_phone_numberr, customer_address,"
+                                          "deliver_time, retrieve_place)"
                                           "VALUES (:product_name, :vendor_code, :count, :vendor_name,"
                                           ":product_type, :capacity, :cores, :customer_name,"
-                                          ":custumer_phone_number, :customer_adress, :deliver_time,"
-                                          ":retrive_place)" };
+                                          ":customer_phone_numberr, :customer_address, :deliver_time,"
+                                          ":retrieve_place)" };
 
 static const QString getGoods           { "SELECT * FROM goods" };
 static const QString getOrders          { "SELECT * FROM orders" };
@@ -119,7 +119,7 @@ QSqlError DatabaseController::getAllOrders(QList<Order>& orderList) const
         PersonalInfo customer;
         customer.setAddress(q.value(Constants::formatPlaceholder(Constants::Placeholders::customerAddress)).toString());
         customer.setName(q.value(Constants::formatPlaceholder(Constants::Placeholders::customerName)).toString());
-        customer.setPhoneNumber(q.value(Constants::formatPlaceholder(Constants::Placeholders::custumerPhoneNumber)).toString());
+        customer.setPhoneNumber(q.value(Constants::formatPlaceholder(Constants::Placeholders::customerPhoneNumber)).toString());
         customer.setRetrievePlace(q.value(Constants::formatPlaceholder(Constants::Placeholders::retrievePlace)).toString());
         customer.setTime(q.value(Constants::formatPlaceholder(Constants::Placeholders::deliverTime)).toString());
 
@@ -255,7 +255,7 @@ QSqlError DatabaseController::updateOrders(const GoodsInfo& sourceGood, const Pe
     q.bindValue(Constants::Placeholders::capacity, sourceGood.capacity());
     q.bindValue(Constants::Placeholders::cores, sourceGood.cores());
     q.bindValue(Constants::Placeholders::customerName, custumerInfo.name());
-    q.bindValue(Constants::Placeholders::custumerPhoneNumber, custumerInfo.phoneNumber());
+    q.bindValue(Constants::Placeholders::customerPhoneNumber, custumerInfo.phoneNumber());
     q.bindValue(Constants::Placeholders::customerAddress, custumerInfo.address());
     q.bindValue(Constants::Placeholders::deliverTime, custumerInfo.time());
     q.bindValue(Constants::Placeholders::retrievePlace, custumerInfo.retrievePlace());

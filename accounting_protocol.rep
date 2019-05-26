@@ -15,8 +15,8 @@ class AccountingServer
     PROP(QList<Order> orders READONLY)
 
     SIGNAL(goodAdded(const GoodsInfo&))
-    SIGNAL(goodRemoved(int index))                   // Not implemented
-    SIGNAL(goodChanged(int index, const GoodsInfo&)) // Not implemented
+    SIGNAL(goodRemoved(int index))
+    SIGNAL(goodChanged(int index, const GoodsInfo&))
     SIGNAL(goodReset())                              // Not implemented
 
     SIGNAL(orderAdded(const Order&))

@@ -16,6 +16,8 @@ GoodsModel::GoodsModel(QObject *parent) : QAbstractListModel(parent)
 
 void GoodsModel::setModelData(const QList<GoodsInfo>& value)
 {
+    qDebug() << Q_FUNC_INFO;
+
     beginResetModel();
     m_data = value;
     endResetModel();
@@ -23,6 +25,8 @@ void GoodsModel::setModelData(const QList<GoodsInfo>& value)
 
 void GoodsModel::appendItem(const GoodsInfo& value)
 {
+    qDebug() << Q_FUNC_INFO;
+
     int idx = m_data.size();
 
     beginInsertRows({}, idx, idx);
@@ -32,6 +36,8 @@ void GoodsModel::appendItem(const GoodsInfo& value)
 
 void GoodsModel::removeItem(int index)
 {
+    qDebug() << Q_FUNC_INFO;
+
     beginRemoveRows({}, index, index);
     m_data.removeAt(index);
     endRemoveRows();
@@ -39,6 +45,9 @@ void GoodsModel::removeItem(int index)
 
 void GoodsModel::changeItem(int idx, const GoodsInfo& value)
 {
+    qDebug() << Q_FUNC_INFO;
+    qDebug() << "Idx:" << idx << "Name:" << value.name() << "Count:" << value.count();
+
     m_data[idx] = value;
     emit dataChanged(index(idx), index(idx));
 }

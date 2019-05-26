@@ -21,10 +21,10 @@ ColumnLayout {
             id: listView
             anchors.fill: parent
 
-            highlight: Rectangle { color: "green" }
+            highlight: Rectangle { color: "green"; opacity: 0.5 }
 
             delegate: Label {
-                text: model.record.name
+                text: model.record.name + " (count: " + model.record.count + ")"
 
                 MouseArea {
                     anchors.fill: parent
