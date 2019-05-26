@@ -9,25 +9,31 @@ ColumnLayout {
     signal orderRequested(int index, int count)
 
 
-    ListView {
-        id: listView
-
+    Rectangle {
         Layout.alignment: Qt.AlignLeft | Qt.AlignTop
         Layout.fillWidth: true
         implicitHeight: 400
 
-        highlight: Rectangle { color: "green" }
+        border.width: 1
+        border.color: "black"
 
-        delegate: Label {
-            text: model.name
+        ListView {
+            id: listView
+            anchors.fill: parent
 
-            MouseArea {
-                anchors.fill: parent
-                onClicked: listView.currentIndex = index;
+            highlight: Rectangle { color: "green" }
+
+            delegate: Label {
+                text: model.name
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: listView.currentIndex = index;
+                }
             }
-        }
 
-        onCountChanged: console.debug("Delegates count:", count);
+            onCountChanged: console.debug("Delegates count:", count);
+        }
     }
 
     ColumnLayout {
