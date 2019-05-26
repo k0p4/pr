@@ -63,43 +63,32 @@ void Controller::logOff()
     setLoggedIn(false);
 }
 
-QVariantList Controller::allGoods() const
+bool Controller::connected() const
 {
-    // DEBUG!!!
-    QVariantList list;
-
-    GoodsInfo info1, info2, info3;
-    info1.setName("Xyi 1");
-    info2.setName("Xyi 2");
-    info3.setName("Xyi 3");
-    info1.setVendorCode("code1");
-    info2.setVendorCode("code2");
-    info3.setVendorCode("code3");
-
-    list.append(QVariant::fromValue(info1));
-    list.append(QVariant::fromValue(info2));
-    list.append(QVariant::fromValue(info3));
-
-    for (const auto& x : list)
-        qDebug() << x.value<GoodsInfo>().name() << x.value<GoodsInfo>().vendorCode();
-
-    return list;
-
-    // DEBUG!!!
-    //return m_replica->allGoods();
+    return m_connected;
 }
 
-QVariantList Controller::orders() const
+bool Controller::loggedIn() const
 {
-    // DEBUG!!!
-    QVariantList list;
+    return m_loggedIn;
+}
 
-    // ...
+void Controller::setConnected(bool connected)
+{
+    if (m_connected == connected)
+        return;
 
-    return list;
+    m_connected = connected;
+    emit connectedChanged(m_connected);
+}
 
-    // DEBUG!!!
-    // return m_replica->orders();
+void Controller::setLoggedIn(bool loggedIn)
+{
+    if (m_loggedIn == loggedIn)
+        return;
+
+    m_loggedIn = loggedIn;
+    emit loggedInChanged(m_loggedIn);
 }
 
 void Controller::connectToHost(const QUrl& hostUrl)

@@ -1,6 +1,9 @@
 #include <QtCore>
 #include <QUuid>
 
+// TODO:
+// Fix typos
+
 POD PersonalInfo(QString name, QString phoneNumber,
                  QString adress, QString time, QString retrivePlace)
 POD GoodsInfo(QString name, QString vendorCode, int count, QString vendorName,
