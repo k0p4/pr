@@ -16,6 +16,9 @@ public:
 
     const QList<GoodsInfo>& modelData() const;
 
+signals:
+    void lowCountWarning(const QString& name, const QString& vendorCode, int count);
+
     // QAbstractItemModel interface
 public:
     int rowCount(const QModelIndex& parent) const override;

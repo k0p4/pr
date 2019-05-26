@@ -23,7 +23,16 @@ public:
     Q_INVOKABLE void loginAsEmployee(const QString& login, const QString& password);
     Q_INVOKABLE void orderGood(int index, int count);
     Q_INVOKABLE void addGood(const GoodsInfo& sourceGood);
+    Q_INVOKABLE void addGood2(QString name,
+                              QString vendorCode,
+                              int count,
+                              QString vendorName,
+                              QString productType,
+                              QString capacity,
+                              int cores);
+    Q_INVOKABLE void updateExistingGood(const QString& vendorCode, int count);
     Q_INVOKABLE void removeGood(const GoodsInfo& sourceGood);
+    Q_INVOKABLE void removeGood2(int index);
     Q_INVOKABLE void logOff();
 
     bool connected() const;

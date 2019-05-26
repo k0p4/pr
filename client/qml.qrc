@@ -4,5 +4,6 @@
         <file>Loginform.qml</file>
         <file>Goodsview.qml</file>
         <file>Ordersview.qml</file>
+        <file>Goodsaddview.qml</file>
     </qresource>
 </RCC>

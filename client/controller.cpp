@@ -53,12 +53,46 @@ void Controller::orderGood(int index, int count)
 
 void Controller::addGood(const GoodsInfo& sourceGood)
 {
+    qDebug() << Q_FUNC_INFO;
+    qDebug() << "Vendor code:" << sourceGood.vendorCode() << "Count:" << sourceGood.count();
+
     m_replica->addGood(sourceGood, m_uid);
+}
+
+void Controller::addGood2(QString name, QString vendorCode, int count, QString vendorName, QString productType, QString capacity, int cores)
+{
+    GoodsInfo info;
+    info.setName(name);
+    info.setVendorCode(vendorCode);
+    info.setCount(count);
+    info.setVendorName(vendorName);
+    info.setProductType(productType);
+    info.setCapacity(capacity);
+    info.setCores(cores);
+
+    addGood(info);
+}
+
+void Controller::updateExistingGood(const QString& vendorCode, int count)
+{
+    qDebug() << Q_FUNC_INFO;
+    qDebug() << "Vendor code:" << vendorCode << "Count:" << count;
+
+    GoodsInfo info;
+    info.setVendorCode(vendorCode);
+    info.setCount(count);
+
+    m_replica->addGood(info, m_uid);
 }
 
 void Controller::removeGood(const GoodsInfo& sourceGood)
 {
     m_replica->removeGood(sourceGood, m_uid);
+}
+
+void Controller::removeGood2(int index)
+{
+    removeGood(m_goodsModel.modelData().at(index));
 }
 
 void Controller::logOff()

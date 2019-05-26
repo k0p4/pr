@@ -5,8 +5,10 @@ import QtQuick.Controls 2.12
 ColumnLayout {
     id: root
     property alias model: listView.model
+    property bool authorized: false
 
     signal orderRequested(int index, int count)
+    signal removeRequested(int index)
 
 
     Rectangle {
@@ -23,12 +25,36 @@ ColumnLayout {
 
             highlight: Rectangle { color: "green"; opacity: 0.5 }
 
-            delegate: Label {
-                text: model.record.name + " (count: " + model.record.count + ")"
+            delegate: Item {
+                implicitWidth: delegateLayout.implicitWidth
+                implicitHeight: delegateLayout.implicitHeight
 
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: listView.currentIndex = index;
+                RowLayout {
+                    id: delegateLayout
+
+                    Label {
+                        text: "X"
+                        font.bold: true
+                        color: deleteMouseArea.containsMouse ? "red" : "black"
+                        enabled: authorized
+
+                        MouseArea {
+                            id: deleteMouseArea
+                            anchors.fill: parent
+                            hoverEnabled: true
+
+                            onClicked: removeRequested(index);
+                        }
+                    }
+
+                    Label {
+                        text: model.record.name + " (count: " + model.record.count + ")"
+
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: listView.currentIndex = index;
+                        }
+                    }
                 }
             }
 

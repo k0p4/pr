@@ -50,6 +50,9 @@ void GoodsModel::changeItem(int idx, const GoodsInfo& value)
 
     m_data[idx] = value;
     emit dataChanged(index(idx), index(idx));
+
+    if (value.count() < 5)
+        emit lowCountWarning(value.name(), value.vendorCode(), value.count());
 }
 
 const QList<GoodsInfo>& GoodsModel::modelData() const
