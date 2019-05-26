@@ -134,10 +134,10 @@ void AccountingServer::orderGood(const GoodsInfo& sourceGood, const PersonalInfo
         emit goodRemoved(m_goods.indexOf(*neededGood));
         m_goods.erase(neededGood);
     } else {
+        neededGood->setCount(count);
         emit goodChanged(m_goods.indexOf(*neededGood), *neededGood);
     }
 
-    neededGood->setCount(count);
     setAllGoods(m_goods);
     emit allGoodsChanged(m_goods);
 
