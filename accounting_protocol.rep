@@ -1,0 +1,25 @@
+#include <QtCore>
+#include <QUuid>
+
+POD PersonalInfo(QString name, QString phoneNumber,
+                 QString adress, QString time, QString retrivePlace)
+POD GoodsInfo(QString name, QString vendorCode, int count, QString vendorName,
+              QString productType, QString capacity, int cores)
+
+POD Order(PersonalInfo customer, GoodsInfo good)
+
+class AccountingServer
+{
+    // Global properties
+    PROP(QList<GoodsInfo> allGoods READONLY)
+    PROP(QList<Order> orders READONLY)
+
+    // customer API
+    SLOT(void orderGood(const GoodsInfo& sourceGood, const PersonalInfo& custumerInfo));
+
+    // employee API
+    SLOT(QUuid loginAsEmployee(const QString& login, const QString& password));
+    SLOT(void addGood(const GoodsInfo& sourceGood, const QUuid& employeeId));
+    SLOT(void removeGood(const GoodsInfo& sourceGood, const QUuid& employeeId));
+    SLOT(void logOff(const QUuid& employeeId));
+};
