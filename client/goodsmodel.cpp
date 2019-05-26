@@ -43,6 +43,10 @@ void GoodsModel::changeItem(int idx, const GoodsInfo& value)
     emit dataChanged(index(idx), index(idx));
 }
 
+const QList<GoodsInfo>& GoodsModel::modelData() const
+{
+    return m_data;
+}
 
 int GoodsModel::rowCount(const QModelIndex&) const
 {

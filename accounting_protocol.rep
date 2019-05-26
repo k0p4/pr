@@ -1,11 +1,8 @@
 #include <QtCore>
 #include <QUuid>
 
-// TODO:
-// Fix typos
-
 POD PersonalInfo(QString name, QString phoneNumber,
-                 QString adress, QString time, QString retrivePlace)
+                 QString address, QString time, QString retrievePlace)
 POD GoodsInfo(QString name, QString vendorCode, int count, QString vendorName,
               QString productType, QString capacity, int cores)
 
@@ -20,13 +17,15 @@ class AccountingServer
     SIGNAL(goodAdded(const GoodsInfo&))
     SIGNAL(goodRemoved(int index))
     SIGNAL(goodChanged(int index, const GoodsInfo&))
+    SIGNAL(goodReset()) // Not implemented
 
     SIGNAL(orderAdded(const Order&))
     SIGNAL(orderRemoved(int index))
     SIGNAL(orderChanged(int index, const Order&))
+    SIGNAL(orderReset()) // Not implemented
 
     // customer API
-    SLOT(void orderGood(const GoodsInfo& sourceGood, const PersonalInfo& custumerInfo));
+    SLOT(void orderGood(const GoodsInfo& sourceGood, const PersonalInfo& customerInfo));
 
     // employee API
     SLOT(QUuid loginAsEmployee(const QString& login, const QString& password));

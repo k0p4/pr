@@ -4,13 +4,9 @@ import QtQuick.Controls 2.12
 
 ColumnLayout {
     id: root
-    property var modelData
+    property alias model: listView.model
 
-    onModelDataChanged: {
-        console.debug(JSON.stringify(modelData));
-    }
-
-    signal orderRequested(string vendorCode, int count)
+    signal orderRequested(int index, int count)
 
 
     ListView {
@@ -20,12 +16,10 @@ ColumnLayout {
         Layout.fillWidth: true
         implicitHeight: 400
 
-        model: modelData
-
         highlight: Rectangle { color: "green" }
 
         delegate: Label {
-            text: modelData.name
+            text: model.name
 
             MouseArea {
                 anchors.fill: parent
@@ -49,7 +43,7 @@ ColumnLayout {
             text: "Order"
             enabled: listView.currentIndex != -1
 
-            onClicked: orderRequested(modelData[listView.currentIndex].vendorCode,
+            onClicked: orderRequested(listView.currentIndex,
                                      countField.text);
         }
     }

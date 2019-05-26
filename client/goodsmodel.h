@@ -14,6 +14,8 @@ public:
     void removeItem(int index);
     void changeItem(int idx, const GoodsInfo& value);
 
+    const QList<GoodsInfo>& modelData() const;
+
     // QAbstractItemModel interface
 public:
     int rowCount(const QModelIndex& parent) const override;

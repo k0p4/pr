@@ -31,9 +31,9 @@ Window {
             currentIndex: tabBar.currentIndex
 
             Goodsview {
-                modelData: Controller.allGoods
+                model: Controller.goodsModel
 
-                onOrderRequested: Controller.orderGood2(vendorCode, count);
+                onOrderRequested: Controller.orderGood(index, count);
             }
 
             Loginform {

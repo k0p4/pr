@@ -19,9 +19,9 @@ static const QString capacity               { ":capacity" };
 static const QString cores                  { ":cores" };
 static const QString customerName           { ":customer_name" };
 static const QString custumerPhoneNumber    { ":custumer_phone_numbe" };
-static const QString customerAdress         { ":customer_adress" };
+static const QString customerAddress         { ":customer_adress" };
 static const QString deliverTime            { ":deliver_time" };
-static const QString retrivePlace           { ":retrive_place" };
+static const QString retrievePlace           { ":retrive_place" };
 
 }
 
@@ -117,10 +117,10 @@ QSqlError DatabaseController::getAllOrders(QList<Order>& orderList) const
         good.setCores(q.value(Constants::formatPlaceholder(Constants::Placeholders::cores)).toInt());
 
         PersonalInfo customer;
-        customer.setAdress(q.value(Constants::formatPlaceholder(Constants::Placeholders::customerAdress)).toString());
+        customer.setAddress(q.value(Constants::formatPlaceholder(Constants::Placeholders::customerAddress)).toString());
         customer.setName(q.value(Constants::formatPlaceholder(Constants::Placeholders::customerName)).toString());
         customer.setPhoneNumber(q.value(Constants::formatPlaceholder(Constants::Placeholders::custumerPhoneNumber)).toString());
-        customer.setRetrivePlace(q.value(Constants::formatPlaceholder(Constants::Placeholders::retrivePlace)).toString());
+        customer.setRetrievePlace(q.value(Constants::formatPlaceholder(Constants::Placeholders::retrievePlace)).toString());
         customer.setTime(q.value(Constants::formatPlaceholder(Constants::Placeholders::deliverTime)).toString());
 
         Order order;
@@ -255,9 +255,9 @@ QSqlError DatabaseController::updateOrders(const GoodsInfo& sourceGood, const Pe
     q.bindValue(Constants::Placeholders::cores, sourceGood.cores());
     q.bindValue(Constants::Placeholders::customerName, custumerInfo.name());
     q.bindValue(Constants::Placeholders::custumerPhoneNumber, custumerInfo.phoneNumber());
-    q.bindValue(Constants::Placeholders::customerAdress, custumerInfo.adress());
+    q.bindValue(Constants::Placeholders::customerAddress, custumerInfo.address());
     q.bindValue(Constants::Placeholders::deliverTime, custumerInfo.time());
-    q.bindValue(Constants::Placeholders::retrivePlace, custumerInfo.retrivePlace());
+    q.bindValue(Constants::Placeholders::retrievePlace, custumerInfo.retrievePlace());
 
     if (!q.exec())
         return q.lastError();

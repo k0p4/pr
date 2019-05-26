@@ -6,6 +6,31 @@
 Controller::Controller(QObject *parent)
     : QObject(parent)
 {
+    QTimer::singleShot(5000, this, [this](){
+        GoodsInfo info1, info2, info3;
+
+        info1.setName("Good #1");
+        info1.setCount(10);
+        info1.setVendorCode("good_1");
+
+        info2.setName("Good #2");
+        info2.setCount(15);
+        info2.setVendorCode("good_2");
+
+        info3.setName("Good #3");
+        info3.setCount(20);
+        info3.setVendorCode("good_3");
+
+        this->addGood(info1);
+        this->addGood(info2);
+        this->addGood(info3);
+    });
+}
+
+Controller* Controller::instance()
+{
+    static Controller c;
+    return &c;
 }
 
 void Controller::registerTypes()
@@ -33,16 +58,16 @@ void Controller::loginAsEmployee(const QString &login, const QString &password)
     setLoggedIn(!m_uid.isNull());
 }
 
-void Controller::orderGood(const GoodsInfo &sourceGood, const PersonalInfo &custumerInfo)
+void Controller::orderGood(int index, int count)
 {
-    m_replica->orderGood(sourceGood, custumerInfo);
-}
+    qDebug() << "Order good with index & count:" << index << count;
 
-void Controller::orderGood2(const QString& vendorCode, int count)
-{
-    qDebug() << "Order good with vendor code & count:" << vendorCode << count;
+    GoodsInfo info = m_goodsModel.modelData().at(index);
+    info.setCount(count);
 
-    // ...
+    qDebug() << "Good:" << info.vendorCode();
+
+    m_replica->orderGood(info, {});
 }
 
 void Controller::addGood(const GoodsInfo& sourceGood)
@@ -71,6 +96,16 @@ bool Controller::connected() const
 bool Controller::loggedIn() const
 {
     return m_loggedIn;
+}
+
+QAbstractListModel* Controller::goodsModel()
+{
+    return &m_goodsModel;
+}
+
+QAbstractListModel* Controller::ordersModel()
+{
+    return &m_ordersModel;
 }
 
 void Controller::setConnected(bool connected)
@@ -109,8 +144,15 @@ void Controller::connectToHost(const QUrl& hostUrl)
 
         if (m_connected) {
             qDebug() << "Connected.";
-            //connect(m_replica, &AccountingServerReplica::allGoodsChanged, this, &Controller::allGoodsChanged); // DEBUG!!!
-            //connect(m_replica, &AccountingServerReplica::ordersChanged, this, &Controller::ordersChanged); // DEBUG!!!
+
+            m_goodsModel.setModelData(m_replica->allGoods());
+            m_ordersModel.setModelData(m_replica->orders());
+
+            connect(m_replica, &AccountingServerReplica::goodAdded, &m_goodsModel, &GoodsModel::appendItem);
+            // Also: changed, removed, reset...
+
+            connect(m_replica, &AccountingServerReplica::orderAdded, &m_ordersModel, &OrdersModel::appendItem);
+            // Also: changed, removed, reset...
         }
     });
 }
