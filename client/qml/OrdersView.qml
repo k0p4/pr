@@ -21,13 +21,9 @@ ColumnLayout {
 
             highlight: Rectangle { color: "green"; opacity: 0.5 }
 
-            delegate: Label {
-                text: model.record.good.name + " (count: " + model.record.good.count + ")"
-
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: listView.currentIndex = index;
-                }
+            delegate: GoodsDelegate {
+                value: listView.model.record.good
+                onClicked: listView.currentIndex = index;
             }
 
             onCountChanged: console.debug("Delegates count:", count);

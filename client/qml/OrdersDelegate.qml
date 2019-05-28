@@ -2,35 +2,32 @@ import QtQuick 2.12
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.12
 
-ColumnLayout {
+Item {
     id: root
-    property alias model: listView.model
 
+    property var value
+    signal clicked()
 
-    Rectangle {
-        Layout.alignment: Qt.AlignLeft | Qt.AlignTop
-        Layout.fillWidth: true
-        implicitHeight: 400
+    implicitWidth: layout.implicitWidth
+    implicitHeight: layout.implicitHeight
 
-        border.width: 1
-        border.color: "black"
+    GridLayout {
+        id: layout
 
-        ListView {
-            id: listView
-            anchors.fill: parent
+        anchors.fill: parent
+        columnSpacing: 10
 
-            highlight: Rectangle { color: "green"; opacity: 0.5 }
+        Label { text: "Name: " + value.name }
+        Label { text: "Vendor code: " + value.vendorCode }
+        Label { text: "Count: " + value.count }
+        Label { text: "Vendor name: " + value.vendorName }
+        Label { text: "Product type: " + value.productType }
+        Label { text: "Capacity: " + value.capacity }
+        Label { text: "Cores: " + value.cores }
+    }
 
-            delegate: Label {
-                text: model.record.good.name + " (count: " + model.record.good.count + ")"
-
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: listView.currentIndex = index;
-                }
-            }
-
-            onCountChanged: console.debug("Delegates count:", count);
-        }
+    MouseArea {
+        anchors.fill: parent
+        onClicked: root.clicked();
     }
 }
