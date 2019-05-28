@@ -8,14 +8,16 @@ Item {
     property var value
     signal clicked()
 
-    implicitWidth: layout.implicitWidth
-    implicitHeight: layout.implicitHeight
+    implicitWidth: layout.implicitWidth + layout.anchors.leftMargin + layout.anchors.rightMargin
+    implicitHeight: layout.implicitHeight + layout.anchors.topMargin + layout.anchors.bottomMargin
 
     GridLayout {
         id: layout
 
         anchors.fill: parent
+        anchors.margins: 4
         columnSpacing: 10
+        columns: 3
 
         Label { text: "Name: " + value.name }
         Label { text: "Vendor code: " + value.vendorCode }

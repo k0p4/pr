@@ -18,6 +18,7 @@ ColumnLayout {
         ListView {
             id: listView
             anchors.fill: parent
+            spacing: 10
 
             highlight: Rectangle { color: "green"; opacity: 0.5 }
 

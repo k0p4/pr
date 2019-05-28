@@ -26,11 +26,13 @@ ColumnLayout {
             highlight: Rectangle { color: "green"; opacity: 0.5 }
 
             delegate: Item {
-                implicitWidth: delegateLayout.implicitWidth
+                width: parent.width
                 implicitHeight: delegateLayout.implicitHeight
 
                 RowLayout {
                     id: delegateLayout
+                    width: parent.width
+                    spacing: 10
 
                     Label {
                         text: "X"
@@ -48,6 +50,7 @@ ColumnLayout {
                     }
 
                     GoodsDelegate {
+                        Layout.maximumWidth: delegateLayout.width - 10
                         value: model.record
                         onClicked: listView.currentIndex = index;
                     }
@@ -72,7 +75,7 @@ ColumnLayout {
             enabled: listView.currentIndex != -1
 
             onClicked: orderRequested(listView.currentIndex,
-                                     countField.text);
+                                      countField.text);
         }
     }
 }
