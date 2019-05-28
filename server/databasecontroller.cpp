@@ -32,7 +32,7 @@ static const QString createGoodsTable   { "create table goods(id integer primary
 
 static const QString createOrdersTable  { "create table orders(id integer primary key, product_name varchar, vendor_code varchar,"
                                           "count integer, vendor_name varchar, product_type varchar, capacity varchar, cores integer,"
-                                          "customer_name varchar, customer_phone_numberr varchar, customer_address varchar,"
+                                          "customer_name varchar, customer_phone_number varchar, customer_address varchar,"
                                           "deliver_time varchar, retrieve_place varchar)" };
 
 static const QString insertGood         { "INSERT INTO goods (name, vendor_code, count, vendor_name, product_type, capacity, cores)"
@@ -43,11 +43,11 @@ static const QString removeGood         { "DELETE FROM goods WHERE vendor_code =
 static const QString updateGoods        { "UPDATE goods SET count = :count WHERE vendor_code = :vendor_code;" };
 static const QString updateOrders       { "INSERT INTO orders (product_name, vendor_code,"
                                           "count, vendor_name, product_type, capacity, cores,"
-                                          "customer_name, customer_phone_numberr, customer_address,"
+                                          "customer_name, customer_phone_number, customer_address,"
                                           "deliver_time, retrieve_place)"
                                           "VALUES (:product_name, :vendor_code, :count, :vendor_name,"
                                           ":product_type, :capacity, :cores, :customer_name,"
-                                          ":customer_phone_numberr, :customer_address, :deliver_time,"
+                                          ":customer_phone_number, :customer_address, :deliver_time,"
                                           ":retrieve_place)" };
 
 static const QString getGoods           { "SELECT * FROM goods" };
