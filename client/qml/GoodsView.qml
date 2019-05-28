@@ -26,6 +26,8 @@ ColumnLayout {
             highlight: Rectangle { color: "green"; opacity: 0.5 }
 
             delegate: Item {
+                readonly property var modelFwd: model
+
                 implicitWidth: delegateLayout.implicitWidth
                 implicitHeight: delegateLayout.implicitHeight
 
@@ -48,12 +50,8 @@ ColumnLayout {
                     }
 
                     GoodsDelegate {
-                        value: model.record
-
-                        MouseArea {
-                            anchors.fill: parent
-                            onClicked: listView.currentIndex = index;
-                        }
+                        value: modelFwd.record
+                        onClicked: listView.currentIndex = index;
                     }
                 }
             }
