@@ -47,8 +47,8 @@ ColumnLayout {
                         }
                     }
 
-                    Label {
-                        text: model.record.name + " (count: " + model.record.count + ")"
+                    GoodsDelegate {
+                        value: model.record
 
                         MouseArea {
                             anchors.fill: parent

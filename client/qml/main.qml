@@ -39,7 +39,7 @@ Window {
             Layout.margins: 20
             currentIndex: tabBar.currentIndex
 
-            Goodsview {
+            GoodsView {
                 enabled: Controller.connected
                 authorized: Controller.loggedIn
                 model: Controller.goodsModel
@@ -48,19 +48,19 @@ Window {
                 onRemoveRequested: Controller.removeGood2(index);
             }
 
-            Loginform {
+            LoginForm {
                 isLoggedIn: Controller.loggedIn
 
                 onLoginRequested: Controller.loginAsEmployee(login, password)
                 onLogoutRequested: Controller.logOff();
             }
 
-            Ordersview {
+            OrdersView {
                 enabled: Controller.loggedIn
                 model: Controller.ordersModel
             }
 
-            Goodsaddview {
+            GoodsAddView {
                 enabled: Controller.loggedIn
 
                 onAddNewRequested: Controller.addGood2(name,

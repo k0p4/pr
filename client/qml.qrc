@@ -1,9 +1,11 @@
 <RCC>
     <qresource prefix="/">
-        <file>main.qml</file>
-        <file>Loginform.qml</file>
-        <file>Goodsview.qml</file>
-        <file>Ordersview.qml</file>
-        <file>Goodsaddview.qml</file>
+        <file>qml/main.qml</file>
+        <file>qml/LoginForm.qml</file>
+        <file>qml/GoodsView.qml</file>
+        <file>qml/OrdersView.qml</file>
+        <file>qml/GoodsAddView.qml</file>
+        <file>qml/GoodsDelegate.qml</file>
+        <file>qml/OrdersDelegate.qml</file>
     </qresource>
 </RCC>
