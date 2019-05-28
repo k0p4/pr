@@ -15,6 +15,7 @@ ColumnLayout {
         TextField {
             id: loginField
             Layout.fillWidth: true
+            text: "admin"
         }
     }
 
@@ -28,6 +29,7 @@ ColumnLayout {
             Layout.fillWidth: true
             passwordCharacter: "*"
             echoMode: TextInput.Password
+            text: "1"
         }
     }
 

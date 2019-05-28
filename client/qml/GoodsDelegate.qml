@@ -19,11 +19,11 @@ Item {
 
         Label { text: "Name: " + value.name }
         Label { text: "Vendor code: " + value.vendorCode }
-        Label { text: "Count: " + value.count }
         Label { text: "Vendor name: " + value.vendorName }
         Label { text: "Product type: " + value.productType }
         Label { text: "Capacity: " + value.capacity }
         Label { text: "Cores: " + value.cores }
+        Label { text: "Count: " + value.count; font.bold: true }
     }
 
     MouseArea {

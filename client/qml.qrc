@@ -6,6 +6,5 @@
         <file>qml/OrdersView.qml</file>
         <file>qml/GoodsAddView.qml</file>
         <file>qml/GoodsDelegate.qml</file>
-        <file>qml/OrdersDelegate.qml</file>
     </qresource>
 </RCC>

@@ -22,7 +22,7 @@ ColumnLayout {
             highlight: Rectangle { color: "green"; opacity: 0.5 }
 
             delegate: GoodsDelegate {
-                value: listView.model.record.good
+                value: model.record.good
                 onClicked: listView.currentIndex = index;
             }
 
